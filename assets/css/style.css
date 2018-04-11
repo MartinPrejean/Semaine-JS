@@ -1,0 +1,40 @@
+html, body {
+    overflow: hidden;
+}
+body {
+    margin:0;padding:0;
+    min-height:100vh;
+}
+
+.wrapper {
+    background:url('../img/wrapper1.png');
+    width:100%;
+    height:100vh;
+    background-size:cover;
+}
+
+.player {
+    background:url('../img/0.png');
+    width: 90px;
+    height: 189px;
+    position:absolute;
+    transition:500ms;
+    bottom:0;
+    background-repeat:no-repeat;
+    background-size: contain;
+}
+
+.player-move {
+    animation:.5s run infinite;
+}
+
+
+@keyframes run {
+    0% {background:url('../img/1.png');background-repeat:no-repeat;}
+    10% {background:url('../img/2.png');background-repeat:no-repeat;}
+    20% {background:url('../img/3.png');background-repeat:no-repeat;}
+    40% {background:url('../img/4.png');background-repeat:no-repeat;}
+    60% {background:url('../img/5.png');background-repeat:no-repeat;}
+    80% {background:url('../img/6.png');background-repeat:no-repeat;}
+    100% {background:url('../img/7.png');background-repeat:no-repeat;}
+}
