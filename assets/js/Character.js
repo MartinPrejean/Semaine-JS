@@ -14,6 +14,7 @@ class Character {
         this.width = 110
     }
 
+    /* Déplacement découpé en 5 étapes pour l'accorder au keyframes */
     move(direction, el) {
         let coord = {'x' : this.x, 'y' : this.y};
         switch(direction) {
@@ -52,6 +53,7 @@ class Character {
             }
     }
 
+    /* Correction en cas d'appuie constant sur une touche */
     correctMoveSpeed(el) {
         if(this.count == 1) {
             setTimeout(() => {

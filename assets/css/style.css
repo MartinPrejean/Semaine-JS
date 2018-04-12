@@ -4,6 +4,7 @@ html, body {
 body {
     margin:0;padding:0;
     min-height:100vh;
+    font-family:"Karla"
 }
 
 .wrapper {
@@ -97,3 +98,63 @@ body {
     80% {background:url('../img/6.png');background-repeat:no-repeat;}
     100% {background:url('../img/7.png');background-repeat:no-repeat;}
 }
+
+
+
+.game-over-container{
+    color : white ;
+    background-color: #d94040;
+    width : 600px;
+    height: 400px;
+    position: absolute;
+    top:50%;
+    left : 50%;
+    padding:40px;
+    opacity:0;
+    transition:.5s;
+    margin-left:calc(-600px/2);
+    margin-top:calc(-400px/2);
+    border-radius:.5s;
+  }
+  
+  .game-over-container .title{
+    width: 100%;
+    text-align: center;
+    font-size: 200%;
+    margin-bottom: 40px;
+  }
+  
+  .score-final{
+    margin-left: 25px;
+    font-size: 150%;
+  }
+  
+  .boutons{
+    width: 210px;
+    margin: 0 0 0 25%;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .button{
+    margin: 30px 0 0 0;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: 0px 3px 3px #00000052;
+    padding: 15px;
+    width: 300px;
+    background:#fff;
+    border:2px solid #fff;
+    color:#d94040;
+    text-decoration:none;
+  }
+  
+  .button:hover{
+    background-color: white;
+    color: #d94040;
+    transition: 0.7s;
+  }
+  

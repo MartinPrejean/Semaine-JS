@@ -13,8 +13,13 @@ class Letter {
         this.noRepeat = true
         this.letter = letter
         this.uniqueColor = uniqueColor
+        this.score = 0
     }
 
+    /* Déplacement des lettres et gestion en cas de colision de la lettre et du personnage.£
+       Lancer un nouveau mot pour continuer à jouer
+       Gestion en cas d'echec (perte de la vie et si la vie est égale à zéro afficher une div)
+   */
     moveLetter(el, color, perso, uniqueColor) {
         setInterval(() => {
             this.y += 10
@@ -24,27 +29,28 @@ class Letter {
                     const singleLetter = el.innerHTML
                     this.collision = false
                     el.style.opacity = "0"
-                    for(let j = 0; j <= this.word.length; j++) {
-                        if(singleLetter == this.word[j] && this.uniqueColor == this.color) {
+                    for(let j = 0; j <= CONSTANT.word.length; j++) {
+                        if(singleLetter == CONSTANT.word[j] && this.uniqueColor == this.color) {
                             CONSTANT.LETTER_ONE = [singleLetter, ...CONSTANT.LETTER_ONE]
                             for(let k = 0; k <= CONSTANT.LETTER_ONE.length; k++) {
                                 if(singleLetter == CONSTANT.LETTER_ONE[k]) {
                                     const allDiv = document.querySelectorAll('.word-style')
                                     allDiv[j].style.color = this.uniqueColor
                                     allDiv[j].style.background = "#fff"
+                                    CONSTANT.score++
                                     CONSTANT.LETTER_ONE = CONSTANT.LETTER_ONE.filter((elem, index, self) => {
                                         return index === self.indexOf(elem);
                                     })
+                                    localStorage.setItem('ALL_WORLD', CONSTANT.ALL_WORLD)
+                                    console.log(CONSTANT.ALL_WORLD)
                                     console.log(CONSTANT.LETTER_ONE)
                                     const content = document.querySelector('.content')
-                                    if(CONSTANT.LETTER_ONE.length == this.word.length) {
+                                    if(CONSTANT.LETTER_ONE.length == CONSTANT.word.length) {
                                         for(let t = 0; t < CONSTANT.word.length; t++) {
                                             content.removeChild(allDiv[t])
                                         }
                                         CONSTANT.word = CONSTANT.LEVEL_ONE_WORD[Math.floor(Math.random() * CONSTANT.LEVEL_ONE_WORD.length)].toUpperCase()
                                         for(let i = 0; i < CONSTANT.word.length; i++) {
-                                            console.log(i)
-                                            console.log(CONSTANT.word)
                                             CONSTANT.LETTER_ONE = []
                                             const wordDiv = document.createElement("div")
                                             const wordText = document.createTextNode(CONSTANT.word[i])
@@ -59,11 +65,16 @@ class Letter {
                         } else {
                             if(this.noRepeat) {
                                 this.noRepeat = false
-                                if(CONSTANT.vie == 0) {
+                                if(CONSTANT.vie == 1) {
+                                    const gameOver = document.querySelector('.game-over-container')
+                                    gameOver.style.opacity = "1"
+                                    const scoreFinal = document.querySelector('.score-final')
+                                    scoreFinal.innerHTML = `Score : ${CONSTANT.score} mot(s) complété(s) `
+                                    CONSTANT.play = 1
                                     CONSTANT.vie = 0
-                                    //this.getResult()
                                 } else {
-                                    CONSTANT.vie--
+                                    console.log(CONSTANT.word.indexOf(singleLetter))
+                                    if(CONSTANT.word.indexOf(singleLetter) == -1 && this.color != this.uniqueColor) { CONSTANT.vie-- }
                                 }
                                 const vieDiv = document.querySelector(".vie-style")
                                 vieDiv.innerHTML = CONSTANT.vie
@@ -82,16 +93,8 @@ class Letter {
         }, 100)
     }
 
-    removeDuplicates(array){
-        let seen = []
-        for (let i = 0; i < array.length; i++) {
-          if (seen.lastIndexOf(array[i])==-1) {
-            seen.push(array[i])
-          }
-        }
-        return seen
-    }
 
+    /* Gestion des colisions par rapport à la lettre et le personnage */
     isCollide(a, b) {
         var aRect = a.getBoundingClientRect();
         var bRect = b.getBoundingClientRect();

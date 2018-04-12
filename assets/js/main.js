@@ -6,10 +6,10 @@ const player = new Character(CONSTANT.DIRECTION.DROITE);
 const divPlayer = document.querySelector('.player')
 const uniqueColor = CONSTANT.COLORS[Math.floor(Math.random() * CONSTANT.COLORS.length)]
 
-const play = 0;
 
 let allLetters = []
 
+/* Gestion des déplacements de la flèche gauche et droite*/
 window.addEventListener('keydown', (e) => {
     let key = e.keyCode
     switch(key) {
@@ -25,6 +25,7 @@ window.addEventListener('keydown', (e) => {
 })
 
 
+/* Généré le premier */
 function getWord() {
     for(let i = 0; i < CONSTANT.word.length; i++) {
         const wordDiv = document.createElement("div")
@@ -36,9 +37,9 @@ function getWord() {
         content.appendChild(wordDiv)
     }
 }
-
 getWord()
 
+/* Ajouter des lettres aléatoire */
 function addElement () { 
     const selectColor = CONSTANT.COLORS[Math.floor(Math.random() * CONSTANT.COLORS.length)]
     const posXRandom = `${CONSTANT.POS_Y_SECOND[Math.floor(Math.random()* CONSTANT.POS_Y_SECOND.length)] - 50}px`
@@ -61,6 +62,7 @@ function addElement () {
     }
 }
 
+/* Ajouter des lettres du mot */
 function addLetterOfWord() { 
     const posXRandom = `${CONSTANT.POS_Y_FIRST[Math.floor(Math.random()* CONSTANT.POS_Y_FIRST.length)] - 50}px`    
     const letter = document.createElement("div")
@@ -80,7 +82,8 @@ function addLetterOfWord() {
     }
 }
 
-function getVie() {
+/* Création de la div pour la vie */
+function creationVie() {
     const score = document.querySelector('.score')
     const vieDiv = document.createElement("div")
     const vieText = document.createTextNode(CONSTANT.vie)
@@ -89,17 +92,44 @@ function getVie() {
     score.appendChild(vieDiv)
 }
 
-getVie()
+creationVie()
 
+const restart = document.querySelector('#restart')
+restart.addEventListener('click', () => {
+    CONSTANT.play = 0
+    const allDiv = document.querySelectorAll('.word-style')
+    const content = document.querySelector('.content')
+    for(let t = 0; t < CONSTANT.word.length; t++) {
+        content.removeChild(allDiv[t])
+    }
+    CONSTANT.word = CONSTANT.LEVEL_ONE_WORD[Math.floor(Math.random() * CONSTANT.LEVEL_ONE_WORD.length)].toUpperCase()
+    CONSTANT.ALL_WORLD += CONSTANT.word + ','
+    console.log(CONSTANT.ALL_WORLD)
+    for(let i = 0; i < CONSTANT.word.length; i++) {
+        CONSTANT.LETTER_ONE = []
+        const wordDiv = document.createElement("div")
+        const wordText = document.createTextNode(CONSTANT.word[i])
+        wordDiv.appendChild(wordText)
+        wordDiv.style.background = uniqueColor
+        wordDiv.classList.add('word-style')
+        content.appendChild(wordDiv)
+        const gameOver = document.querySelector('.game-over-container')
+        gameOver.style.display = "none"
+        CONSTANT.vie = 5
+    }
+})
+
+/* Création à intervalle régulier des lettres aléatoire */
 setInterval(() => {
-    if(play == 0) {
+    if(CONSTANT.play == 0) {
         addElement()
     }
 }, 1000)
 
-
+/* Création à intervalle régulier des lettres du mots */
 setInterval(() => {
-    if(play == 0) {
+    if(CONSTANT.play == 0) {
         addLetterOfWord()
     }
 }, 5000)
+CONSTANT.ALL_WORLD += CONSTANT.word + ','

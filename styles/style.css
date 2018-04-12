@@ -695,3 +695,65 @@ footer .row{
   width : 35px;
   height: 35px;
 }
+/*** main ***/
+
+.leonardo{
+  position: relative;
+}
+
+.leonardo img{
+  width: 20%;
+  display: block;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.bulle-leonardo{
+  width: auto;
+  position: absolute;
+  top : 10%;
+  left : 44%;
+}
+
+.definitions{
+  background-color: white;
+  width : 80%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  color:#c32c2c;
+  margin-bottom: 50px;
+}
+
+.definitions h3{
+  text-transform: uppercase;
+  margin-bottom: -10px;
+}
+
+.definitions div{
+  margin : 10px 0 20px 10px;
+  display: none;
+}
+
+  
+.button{
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 30px;
+  box-shadow: 0 2px 3px rgba(34, 36, 38, 0.15);
+  padding: 15px;
+  width: 300px;
+  background: #fff;
+  border: 2px solid #fff;
+  color: #d94040;
+  text-decoration: none;
+  display: block;
+  margin: auto;
+  margin-bottom:50px;
+}
+
+.button:hover{
+  background-color: white;
+  color: #d94040;
+  transition: 0.7s;
+}
