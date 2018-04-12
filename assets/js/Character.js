@@ -1,7 +1,7 @@
 import Constance from './Constante.js'
 
 const wrapper = document.querySelector('.wrapper')
-const distanceTouch = 100
+const distanceTouch = 50
 
 class Character {
 
@@ -11,7 +11,7 @@ class Character {
         this.velocity = 0
         this.direction = direction
         this.count = 0
-        this.width = 90
+        this.width = 110
     }
 
     move(direction, el) {
@@ -35,12 +35,11 @@ class Character {
                 break;
             case Constance.DIRECTION.DROITE: 
                 this.count++
-                console.log(coord.x)
                 el.classList.add('player-move')
                 el.style.transform = "scaleX(-1)"
                 for(let i = 0; i < 5; i++) {
                     setTimeout(() => {
-                        if(coord.x <= document.body.clientWidth - distanceTouch / 5) {
+                        if(coord.x <= document.body.clientWidth - this.width) {
                             coord.x += distanceTouch / 5
                             el.style.left = `${coord.x}px`
                             this.x = coord.x
@@ -60,7 +59,7 @@ class Character {
                 this.count = 0
             }, 625)
         } else if(this.count > 1) {
-            this.count = 0
+            //console.log('full')
         }
     }
 
