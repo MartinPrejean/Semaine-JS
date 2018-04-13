@@ -94,6 +94,7 @@ function creationVie() {
 
 creationVie()
 
+/* Relancer une parti */
 const restart = document.querySelector('#restart')
 restart.addEventListener('click', () => {
     CONSTANT.play = 0
